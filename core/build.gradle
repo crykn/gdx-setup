@@ -22,6 +22,10 @@ application {
 	mainClassName = 'com.badlogic.gdx.setup.GdxSetup'
 }
 
+sourceCompatibility = 1.7
+sourceSets.main.java.srcDirs = ["src"]
+sourceSets.main.resources.srcDirs = ["res"]
+
 jar {
 	archiveName = 'gdx-setup.jar'
 	manifest {
