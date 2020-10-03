@@ -16,10 +16,15 @@
 
 plugins {
 	id 'application'
+    id 'eclipse'
 }
 
 application {
 	mainClassName = 'com.badlogic.gdx.setup.GdxSetup'
+}
+
+eclipse {
+    project.name = 'gdx-setup-core'
 }
 
 sourceCompatibility = 1.7
