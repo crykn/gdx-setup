@@ -1,1 +1,2 @@
 include 'core', 'backend'
+include "webui:core", "webui:html", "webui:lwjgl3"
