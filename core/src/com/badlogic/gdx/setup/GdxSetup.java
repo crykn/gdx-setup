@@ -49,7 +49,7 @@ public class GdxSetup {
 		Project project = new Project();
 
 		String packageDir = packageName.replace('.', '/');
-		String sdkPath = sdkLocation.replace('\\', '/');
+		String sdkPath =  sdkLocation != null ? sdkLocation.replace('\\', '/') : "";
 
 		if (sdkLocation != null && !AndroidSDKHelper.isSdkLocationValid(sdkLocation)) {
 			System.out.println("Android SDK location '" + sdkLocation + "' doesn't contain an SDK");

@@ -1,6 +1,5 @@
 package com.badlogic.gdx.setup;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,10 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.badlogic.gdx.setup.DependencyBank.ProjectDependency;
 import com.badlogic.gdx.setup.DependencyBank.ProjectType;
-import com.badlogic.gdx.setup.Executor.CharCallback;
 
 @Service
 public class ProjectGeneratorService {
+	public static final String GENERATED_VERSION = "1.9.12-SNAPSHOT";
 	private ConcurrentHashMap<String, CachedProjects> generatedFiles = new ConcurrentHashMap<>();
 
 	public String generateAndZipGdxProject(GdxProjectData projectData) throws Exception {
@@ -33,6 +32,12 @@ public class ProjectGeneratorService {
 		if (projectData.withHtml)
 			projects.add(ProjectType.HTML);
 
+		// TODO current version has template files for 1.9.12-SNAPSHOT, but puts version 1.9.11
+		// in it. We have to change that.
+		if (!projectData.targetGdxVersion.equals(GENERATED_VERSION)) {
+			projectData.warnings.add("Ignored given gdx-version. Files are generated for 1.9.12-SNAPSHOT.");
+		}
+
 		List<Dependency> dependencies = new ArrayList<Dependency>();
 		dependencies.add(bank.getDependency(ProjectDependency.GDX));
 
@@ -47,13 +52,8 @@ public class ProjectGeneratorService {
 			protected void save() {
 				generatedFiles.put(uuid, new CachedProjects(super.byteArrayOutput.toByteArray()));
 			}
-		}).build(builder, null, projectData.appName, "com.badlogic.setuptest", projectData.mainClass, languageEnum, "",
-				new CharCallback() {
-					@Override
-					public void character(char c) {
-						// do nothing
-					}
-				}, null);
+		}).build(builder, null, projectData.appName, "com.badlogic.setuptest", projectData.mainClass,
+				languageEnum, null, null, null);
 
 		clearCache();
 
