@@ -87,7 +87,7 @@ public class ClassicProjectTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                finalTable(loadingTable);
+                finalTable(generateLoadingTable);
             }
         });
     }

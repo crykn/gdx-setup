@@ -10,8 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.setup.backend.BackendClient;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.setup.tables.*;
 import com.badlogic.gdx.setup.widgets.LibBuilder.LibBuilderStyle;
@@ -29,15 +31,20 @@ public class SetupUi extends ApplicationAdapter {
 	public static LibrariesTable librariesTable;
 	public static OptionsTable optionsTable;
 	public static ClassicProjectTable classicProjectTable;
-	public static LoadingTable loadingTable;
+	public static GenerateLoadingTable generateLoadingTable;
+	public static RetrieveDataLoadingTable retrieveDataLoadingTable;
 	public static Table currentTable;
 	public static final float INTRO_TRANSITION_TIME = 1f;
 	public static final float TRANSITION_TIME = 1.2f;
 	public static final float OUTRO_TRANSITION_TIME = 1.6f;
+	public static BackendClient backendClient;
+	public static List<String> supportedGDXVersions;
 	
 	@Override
 	public void create() {
 		setupUi = this;
+		
+		backendClient = new BackendClient();
 		
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
@@ -70,9 +77,10 @@ public class SetupUi extends ApplicationAdapter {
 		librariesTable = new LibrariesTable();
 		optionsTable = new OptionsTable();
 		classicProjectTable = new ClassicProjectTable();
-		loadingTable = new LoadingTable();
+		generateLoadingTable = new GenerateLoadingTable();
+		retrieveDataLoadingTable = new RetrieveDataLoadingTable();
 
-		showTable(landingTable);
+		firstTable(retrieveDataLoadingTable);
 	}
 
 	@Override
@@ -97,8 +105,18 @@ public class SetupUi extends ApplicationAdapter {
 	public void dispose() {
 		skin.dispose();
 	}
-
-	public static void showTable(Table introTable) {
+    
+    public static void firstTable(Table firstTable) {
+        root.clearChildren();
+        root.add(firstTable).minSize(600, 530);
+        root.validate();
+        currentTable = firstTable;
+        firstTable.addAction(alpha(1.0f, OUTRO_TRANSITION_TIME / 2, Interpolation.fade));
+        firstTable.setColor(1, 1, 1, 0);
+    }
+	
+	public static void slideDownTable(Table introTable) {
+	    root.clearChildren();
 		root.add(introTable).minSize(600, 530);
 		root.validate();
 		currentTable = introTable;
