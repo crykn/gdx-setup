@@ -25,6 +25,8 @@ public class GwtLauncher extends GwtApplication {
 	@Override
 	public GwtApplicationConfiguration getConfig () {
 		GwtApplicationConfiguration gwtApplicationConfiguration = new GwtApplicationConfiguration(GwtApplication.isMobileDevice());
+		gwtApplicationConfiguration.padHorizontal = 0;
+		gwtApplicationConfiguration.padVertical = 0;
 		gwtApplicationConfiguration.disableAudio = true;
 		return gwtApplicationConfiguration;
 	}
