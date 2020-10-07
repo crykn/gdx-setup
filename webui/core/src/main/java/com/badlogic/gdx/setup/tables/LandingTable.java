@@ -9,17 +9,17 @@ import static com.badlogic.gdx.utils.Align.bottomRight;
 import static com.badlogic.gdx.setup.SetupUi.*;
 
 public class LandingTable extends Table  {
-    public LandingTable() {
+    public void populate() {
         setBackground(skin.getDrawable("window"));
         pad(10);
-        
+    
         add().expandY();
-        
+    
         row();
         defaults().space(50f);
         Image image = new Image(skin.getDrawable("logo-libgdx"));
         add(image);
-        
+    
         row();
         Table table = new Table();
         add(table);
@@ -27,28 +27,35 @@ public class LandingTable extends Table  {
         table.defaults().spaceRight(5);
         Label label = new Label("LIBGDX", skin);
         table.add(label).right();
-        
-        label = new Label("1.9.11", skin, "light");
+    
+        label = new Label(supportedGDXVersions.get(0), skin, "light");
         table.add(label).left();
-        
+    
         table.row();
         label = new Label("SNAPSHOT", skin);
         table.add(label).right();
     
-        label = new Label("1.9.12-SNAPSHOT", skin, "light");
+        label = new Label(supportedGDXVersions.get(0), skin, "light");
         table.add(label).left();
-        
+    
         table.row();
-        label = new Label("SETUP VERSION", skin);
+        label = new Label("SETUP", skin);
         table.add(label).right();
     
-        label = new Label("0.0.1", skin, "light");
+        label = new Label(setupVersion, skin, "light");
         table.add(label).left();
-        
+    
+        table.row();
+        label = new Label("BACKEND", skin);
+        table.add(label).right();
+    
+        label = new Label(buildVersion, skin, "light");
+        table.add(label).left();
+    
         row();
         table = new Table();
         add(table);
-        
+    
         TextButton textButton = new TextButton("CREATE NEW PROJECT", skin, "big");
         table.add(textButton);
         textButton.addListener(new ChangeListener() {
@@ -58,15 +65,6 @@ public class LandingTable extends Table  {
             }
         });
     
-//        ImageButton imageButton = new ImageButton(skin, "wizard");
-//        table.add(imageButton);
-//        imageButton.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor) {
-//                nextTable(projectTable);
-//            }
-//        });
-        
         row();
         defaults().clearActor();
         textButton = new TextButton("libgdx.com", skin, "link");

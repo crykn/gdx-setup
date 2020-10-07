@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.setup.backend.BackendClient;
@@ -18,6 +17,9 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.setup.tables.*;
 import com.badlogic.gdx.setup.widgets.LibBuilder.LibBuilderStyle;
 import com.badlogic.gdx.setup.widgets.WizardProgress.ProgressGroupStyle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -38,7 +40,9 @@ public class SetupUi extends ApplicationAdapter {
 	public static final float TRANSITION_TIME = 1.2f;
 	public static final float OUTRO_TRANSITION_TIME = 1.6f;
 	public static BackendClient backendClient;
-	public static List<String> supportedGDXVersions;
+	public static final List<String> supportedGDXVersions = new ArrayList<>();
+	public static String buildVersion;
+	public static final String setupVersion = "0.0.1";
 	
 	@Override
 	public void create() {

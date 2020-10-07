@@ -8,6 +8,7 @@ import com.ray3k.tenpatch.TenPatchDrawable;
 import static com.badlogic.gdx.setup.SetupUi.*;
 
 public class RetrieveDataLoadingTable extends Table  {
+    WaitForResponseListener<BackendClient.VersionResponse> versionResponse;
     TenPatchDrawable tenPatchDrawable;
     Mode mode;
     public enum Mode {
@@ -15,7 +16,7 @@ public class RetrieveDataLoadingTable extends Table  {
     }
 
     public RetrieveDataLoadingTable() {
-        WaitForResponseListener<BackendClient.VersionResponse> versionResponse = new WaitForResponseListener<>();
+        versionResponse = new WaitForResponseListener<>();
         backendClient.getVersions(versionResponse);
         
         tenPatchDrawable = new TenPatchDrawable(skin.get("loading-animation", TenPatchDrawable.class));
@@ -35,10 +36,15 @@ public class RetrieveDataLoadingTable extends Table  {
                     tenPatchDrawable = new TenPatchDrawable(skin.get("loading-hide", TenPatchDrawable.class));
                     Image image = new Image(tenPatchDrawable);
                     add(image);
+                    
+                    supportedGDXVersions.clear();
+                    supportedGDXVersions.addAll(versionResponse.retrievedData.supportedGdxVersions);
+                    buildVersion = versionResponse.retrievedData.backendVersion;
                     break;
                 case HIDING:
                     clearChildren();
                     mode = Mode.DONE;
+                    landingTable.populate();
                     slideDownTable(landingTable);
                     break;
             }
