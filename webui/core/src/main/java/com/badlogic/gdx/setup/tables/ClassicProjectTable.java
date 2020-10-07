@@ -69,7 +69,7 @@ public class ClassicProjectTable extends Table  {
         table.defaults().left();
         CheckBox checkBox = new CheckBox("DESKTOP LWJGL3", skin);
         table.add(checkBox);
-        textField.addListener(new ChangeListener() {
+        checkBox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.withDesktop = ((CheckBox) actor).isChecked();
@@ -79,7 +79,7 @@ public class ClassicProjectTable extends Table  {
         table.row();
         checkBox = new CheckBox("ANDROID", skin);
         table.add(checkBox);
-        textField.addListener(new ChangeListener() {
+        checkBox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.withAndroid = ((CheckBox) actor).isChecked();
@@ -89,7 +89,7 @@ public class ClassicProjectTable extends Table  {
         table.row();
         checkBox = new CheckBox("IOS ROBOVM", skin);
         table.add(checkBox);
-        textField.addListener(new ChangeListener() {
+        checkBox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.withIos = ((CheckBox) actor).isChecked();
@@ -99,7 +99,7 @@ public class ClassicProjectTable extends Table  {
         table.row();
         checkBox = new CheckBox("HTML5 GWT", skin);
         table.add(checkBox);
-        textField.addListener(new ChangeListener() {
+        checkBox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.withHtml = ((CheckBox) actor).isChecked();
@@ -127,7 +127,7 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.gdxVersion = "1.9.11";
-                finalTable(generateLoadingTable);
+                finalTable(new GenerateLoadingTable(params));
             }
         });
     }

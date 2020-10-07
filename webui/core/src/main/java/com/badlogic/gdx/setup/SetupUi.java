@@ -33,7 +33,6 @@ public class SetupUi extends ApplicationAdapter {
 	public static LibrariesTable librariesTable;
 	public static OptionsTable optionsTable;
 	public static ClassicProjectTable classicProjectTable;
-	public static GenerateLoadingTable generateLoadingTable;
 	public static RetrieveDataLoadingTable retrieveDataLoadingTable;
 	public static Table currentTable;
 	public static final float INTRO_TRANSITION_TIME = 1f;
@@ -81,7 +80,6 @@ public class SetupUi extends ApplicationAdapter {
 		librariesTable = new LibrariesTable();
 		optionsTable = new OptionsTable();
 		classicProjectTable = new ClassicProjectTable();
-		generateLoadingTable = new GenerateLoadingTable();
 		retrieveDataLoadingTable = new RetrieveDataLoadingTable();
 
 		firstTable(retrieveDataLoadingTable);
