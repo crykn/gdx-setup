@@ -1,10 +1,10 @@
 package com.badlogic.gdx.setup.rest;
 
-import com.badlogic.gdx.setup.GdxProjectData;
 import com.badlogic.gdx.setup.ProjectGeneratorService;
 import com.badlogic.gdx.setup.ProjectGeneratorService.CachedProjects;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.badlogic.gdx.setup.backend.GenerateProjectParams;
+import com.badlogic.gdx.setup.backend.GeneratorResponse;
+import com.badlogic.gdx.setup.backend.VersionResponse;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -42,30 +41,12 @@ public class ProjectGeneratorController {
     }
 
     @GetMapping("/generate")
-    public GeneratorResponse generateProject(@RequestParam(defaultValue = "1.9.12") String gdxVersion,
-                                             @RequestParam String appName,
-                                             @RequestParam String mainClass,
-                                             @RequestParam(defaultValue = "false") boolean withHtml,
-                                             @RequestParam(defaultValue = "false") boolean withIos,
-                                             @RequestParam(defaultValue = "false") boolean withDesktop,
-                                             @RequestParam(defaultValue = "false") boolean withAndroid
-                                             // add everything needed here...
-    ) {
-
-        GdxProjectData projectData = new GdxProjectData();
-        projectData.targetGdxVersion = gdxVersion;
-        projectData.withHtml = withHtml;
-        projectData.withAndroid = withAndroid;
-        projectData.withDesktop = withDesktop;
-        projectData.withIos = withIos;
-        projectData.appName = appName;
-        projectData.mainClass = mainClass;
+    public GeneratorResponse generateProject(GenerateProjectParams projectData) {
 
         GeneratorResponse response = new GeneratorResponse();
 
         try {
-            String zipFileId = service.generateAndZipGdxProject(projectData);
-            response.downloadUrl = zipFileId;
+            response.downloadUrl = service.generateAndZipGdxProject(projectData);
             response.warnings = projectData.warnings.toArray(new String[0]);
         } catch (Throwable t) {
             String errorMessage = t.getMessage();
@@ -88,16 +69,4 @@ public class ProjectGeneratorController {
         return response;
     }
 
-    @JsonInclude(Include.NON_NULL)
-    public static class GeneratorResponse {
-        public String downloadUrl;
-        public String errorMessage;
-        public String[] warnings;
-    }
-
-    @JsonInclude(Include.NON_NULL)
-    public static class VersionResponse {
-        public String backendVersion;
-        public String[] supportedGdxVersions;
-    }
 }

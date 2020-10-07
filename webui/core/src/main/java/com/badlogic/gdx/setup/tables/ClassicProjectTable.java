@@ -1,14 +1,22 @@
 package com.badlogic.gdx.setup.tables;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.setup.backend.BackendClient;
+import com.badlogic.gdx.setup.backend.GenerateProjectParams;
 
-import static com.badlogic.gdx.setup.SetupUi.*;
+import static com.badlogic.gdx.setup.SetupUi.finalTable;
+import static com.badlogic.gdx.setup.SetupUi.landingTable;
+import static com.badlogic.gdx.setup.SetupUi.previousTable;
+import static com.badlogic.gdx.setup.SetupUi.skin;
 
 public class ClassicProjectTable extends Table  {
-    private BackendClient.GenerateProjectParams params = new BackendClient.GenerateProjectParams();
+    private GenerateProjectParams params = new GenerateProjectParams();
     
     public void populate() {
         setBackground(skin.getDrawable("window"));

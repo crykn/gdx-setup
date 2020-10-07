@@ -1,2 +1,2 @@
-include 'core', 'backend'
+include 'core', 'backend', 'models'
 include "webui:core", "webui:html", "webui:lwjgl3"

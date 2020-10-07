@@ -28,14 +28,14 @@ public class LandingTable extends Table  {
         Label label = new Label("LIBGDX", skin);
         table.add(label).right();
     
-        label = new Label(supportedGDXVersions.get(0), skin, "light");
+        label = new Label(supportedGDXVersions[0], skin, "light");
         table.add(label).left();
     
         table.row();
         label = new Label("SNAPSHOT", skin);
         table.add(label).right();
     
-        label = new Label(supportedGDXVersions.get(0), skin, "light");
+        label = new Label(supportedGDXVersions[0], skin, "light");
         table.add(label).left();
     
         table.row();

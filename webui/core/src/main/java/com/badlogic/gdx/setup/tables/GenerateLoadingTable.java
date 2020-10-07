@@ -4,20 +4,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.setup.backend.BackendClient;
+import com.badlogic.gdx.setup.backend.GenerateProjectParams;
+import com.badlogic.gdx.setup.backend.GeneratorResponse;
 import com.ray3k.tenpatch.TenPatchDrawable;
 
 import static com.badlogic.gdx.setup.SetupUi.backendClient;
 import static com.badlogic.gdx.setup.SetupUi.skin;
 
 public class GenerateLoadingTable extends Table  {
-    WaitForResponseListener<BackendClient.GeneratorResponse> generatorResponse;
+    WaitForResponseListener<GeneratorResponse> generatorResponse;
     TenPatchDrawable tenPatchDrawable;
     Mode mode;
     public enum Mode {
         GENERATING, SUCCESS, FAIL, HIDING, DONE
     }
 
-    public GenerateLoadingTable(BackendClient.GenerateProjectParams params) {
+    public GenerateLoadingTable(GenerateProjectParams params) {
         generatorResponse = new WaitForResponseListener<>();
         backendClient.generateProject(params, generatorResponse);
         
@@ -35,7 +37,7 @@ public class GenerateLoadingTable extends Table  {
                 case SUCCESS:
                     mode = Mode.HIDING;
                     
-                    Gdx.net.openURI(generatorResponse.retrievedData.getDownloadUrl());
+                    Gdx.net.openURI(backendClient.getDownloadUrl(generatorResponse.retrievedData));
                     
                     clearChildren();
                     tenPatchDrawable = new TenPatchDrawable(skin.get("loading-hide", TenPatchDrawable.class));

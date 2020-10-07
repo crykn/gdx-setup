@@ -20,6 +20,7 @@ public class BackendClient {
     public void generateProject(GenerateProjectParams params, IBackendResponse<GeneratorResponse> callback) {
         Map<String, String> httpParams = new HashMap<>();
         httpParams.put("appName", params.appName);
+        httpParams.put("packageName", params.packageName);
         httpParams.put("mainClass", params.mainClass);
         httpParams.put("withAndroid", String.valueOf(params.withAndroid));
         httpParams.put("withHtml", String.valueOf(params.withHtml));
@@ -42,7 +43,7 @@ public class BackendClient {
                 for (JsonValue warning = json.get("warnings").child; warning != null; warning = warning.next) {
                     warnings.add(warning.asString());
                 }
-                response.warnings = warnings;
+                response.warnings = warnings.toArray(new String[]{});
 
                 return response;
             }
@@ -63,7 +64,7 @@ public class BackendClient {
                 for (JsonValue gdxVersion = json.get("supportedGdxVersions").child; gdxVersion != null; gdxVersion = gdxVersion.next) {
                     gdxVersions.add(gdxVersion.asString());
                 }
-                response.supportedGdxVersions = gdxVersions;
+                response.supportedGdxVersions = gdxVersions.toArray(new String[]{});
 
                 return response;
             }
@@ -82,6 +83,10 @@ public class BackendClient {
         http.setUrl(BASE_URL + uri);
         Gdx.app.debug(LOG_TAG, uri);
         return http;
+    }
+
+    public String getDownloadUrl(GeneratorResponse generatorResponse) {
+        return BASE_URL + "/download/" + generatorResponse.downloadUrl;
     }
 
     public interface IBackendResponse<T> {
@@ -139,32 +144,5 @@ public class BackendClient {
         public void cancelled() {
             callback.onFail(SC_NO_CONNECTION, "Connection problem");
         }
-    }
-
-    // see ProjectGeneratorController#generate
-    public static class GenerateProjectParams {
-        public String gdxVersion;
-        public String appName;
-        public String mainClass;
-        public boolean withHtml;
-        public boolean withIos;
-        public boolean withDesktop;
-        public boolean withAndroid;
-    }
-
-    // see ProjectGeneratorController$GeneratorResponse
-    public static class GeneratorResponse {
-        public String downloadUrl;
-        public String errorMessage;
-        public List<String> warnings;
-
-        public String getDownloadUrl() {
-            return BASE_URL + "/download/" + downloadUrl;
-        }
-    }
-
-    public static class VersionResponse {
-        public String backendVersion;
-        public List<String> supportedGdxVersions;
     }
 }

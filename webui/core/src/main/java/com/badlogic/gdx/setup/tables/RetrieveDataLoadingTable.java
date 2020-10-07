@@ -3,12 +3,13 @@ package com.badlogic.gdx.setup.tables;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.setup.backend.BackendClient;
+import com.badlogic.gdx.setup.backend.VersionResponse;
 import com.ray3k.tenpatch.TenPatchDrawable;
 
 import static com.badlogic.gdx.setup.SetupUi.*;
 
 public class RetrieveDataLoadingTable extends Table  {
-    WaitForResponseListener<BackendClient.VersionResponse> versionResponse;
+    WaitForResponseListener<VersionResponse> versionResponse;
     TenPatchDrawable tenPatchDrawable;
     Mode mode;
     public enum Mode {
@@ -37,8 +38,7 @@ public class RetrieveDataLoadingTable extends Table  {
                     Image image = new Image(tenPatchDrawable);
                     add(image);
                     
-                    supportedGDXVersions.clear();
-                    supportedGDXVersions.addAll(versionResponse.retrievedData.supportedGdxVersions);
+                    supportedGDXVersions = versionResponse.retrievedData.supportedGdxVersions;
                     buildVersion = versionResponse.retrievedData.backendVersion;
                     break;
                 case HIDING:
