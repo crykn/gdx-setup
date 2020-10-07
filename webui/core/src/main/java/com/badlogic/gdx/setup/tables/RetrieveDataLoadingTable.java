@@ -45,6 +45,7 @@ public class RetrieveDataLoadingTable extends Table  {
                     clearChildren();
                     mode = Mode.DONE;
                     landingTable.populate();
+                    classicProjectTable.populate();
                     slideDownTable(landingTable);
                     break;
             }
