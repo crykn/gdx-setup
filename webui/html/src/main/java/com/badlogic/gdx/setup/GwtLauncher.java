@@ -28,6 +28,7 @@ public class GwtLauncher extends GwtApplication {
 		gwtApplicationConfiguration.padHorizontal = 0;
 		gwtApplicationConfiguration.padVertical = 0;
 		gwtApplicationConfiguration.disableAudio = true;
+		gwtApplicationConfiguration.openURLInNewWindow = false;
 		return gwtApplicationConfiguration;
 	}
 
