@@ -57,33 +57,31 @@ public class BackendClientTest {
     @Test
     public void testGetVersionInfo() throws InterruptedException {
         BackendClient backendClient = new BackendClient();
-        WaitForResponseListener<BackendClient.VersionResponse> versionResponse
-                = new WaitForResponseListener<>();
+        WaitForResponseListener<VersionResponse> versionResponse = new WaitForResponseListener<>();
         backendClient.getVersions(versionResponse);
         waitWhileRequesting();
         Assert.assertNotNull(versionResponse.retrievedData);
         Assert.assertNotNull(versionResponse.retrievedData.supportedGdxVersions);
-        Assert.assertFalse(versionResponse.retrievedData.supportedGdxVersions.isEmpty());
+        Assert.assertFalse(versionResponse.retrievedData.supportedGdxVersions.length == 0);
     }
 
     @Test
     public void testGenerateProject() throws InterruptedException {
         BackendClient backendClient = new BackendClient();
-        BackendClient.GenerateProjectParams params = new BackendClient.GenerateProjectParams();
+        GenerateProjectParams params = new GenerateProjectParams();
         params.appName = "test";
         params.gdxVersion = "1.9.11";
+        params.packageName = "com.badlogic.setup.test";
         params.mainClass = "MyTestClass";
         params.withHtml = true;
 
-        WaitForResponseListener<BackendClient.GeneratorResponse> generatorResponse
+        WaitForResponseListener<GeneratorResponse> generatorResponse
                 = new WaitForResponseListener<>();
         backendClient.generateProject(params, generatorResponse);
         waitWhileRequesting();
         Assert.assertNotNull(generatorResponse.retrievedData);
         Assert.assertNotNull(generatorResponse.retrievedData.warnings);
-        if (generatorResponse.retrievedData.downloadUrl != null) {
-            Assert.assertNotNull(generatorResponse.retrievedData.getDownloadUrl());
-        }
+        Assert.assertNotNull(generatorResponse.retrievedData.downloadUrl);
     }
 
     @After
