@@ -135,6 +135,7 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.gdxVersion = "1.9.11";
+                params.packageName = "asdf";
                 finalTable(new GenerateLoadingTable(params));
             }
         });
