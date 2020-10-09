@@ -1,19 +1,16 @@
 package com.badlogic.gdx.setup.tables;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.setup.backend.GenerateProjectParams;
 
-import static com.badlogic.gdx.setup.SetupUi.slideDownFadeInTable;
-import static com.badlogic.gdx.setup.SetupUi.landingTable;
-import static com.badlogic.gdx.setup.SetupUi.slideRightTable;
-import static com.badlogic.gdx.setup.SetupUi.skin;
+import static com.badlogic.gdx.Application.ApplicationType.WebGL;
+import static com.badlogic.gdx.setup.SetupUi.*;
 
 public class ClassicProjectTable extends Table  {
     private GenerateProjectParams params = new GenerateProjectParams();
@@ -21,6 +18,19 @@ public class ClassicProjectTable extends Table  {
     
     public void populate() {
         params.packageName = "asdf";
+        
+        InputListener traversalListener = new InputListener() {
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                if (Gdx.app.getType() == WebGL && keycode == Keys.TAB) {
+                    TextField textField = ((TextField) event.getListenerActor());
+                    textField.next(Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT));
+                    return true;
+                }
+                return false;
+            }
+        };
+        
         setBackground(skin.getDrawable("window"));
         pad(10);
         
@@ -47,6 +57,7 @@ public class ClassicProjectTable extends Table  {
         TextField textField = new TextField("", skin);
         textField.setMessageText("my-gdx-game");
         table.add(textField);
+        textField.addListener(traversalListener);
         textField.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -54,7 +65,7 @@ public class ClassicProjectTable extends Table  {
                 generateButton.setDisabled(!isDataValid());
             }
         });
-        
+    
         table.row();
         label = new Label("MAIN CLASS", skin);
         table.add(label).right();
@@ -62,6 +73,7 @@ public class ClassicProjectTable extends Table  {
         textField = new TextField("", skin);
         textField.setMessageText("Main");
         table.add(textField).left();
+        textField.addListener(traversalListener);
         textField.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
