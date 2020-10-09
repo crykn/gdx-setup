@@ -3,7 +3,6 @@ package com.badlogic.gdx.setup.tables;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.setup.backend.BackendClient;
 
 import static com.badlogic.gdx.utils.Align.bottomRight;
 import static com.badlogic.gdx.setup.SetupUi.*;
@@ -61,7 +60,7 @@ public class LandingTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                nextTable(classicProjectTable);
+                slideLeftTable(classicProjectTable);
             }
         });
     

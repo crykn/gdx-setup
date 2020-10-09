@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.setup.backend.GenerateProjectParams;
 
-import static com.badlogic.gdx.setup.SetupUi.finalTable;
+import static com.badlogic.gdx.setup.SetupUi.slideDownFadeInTable;
 import static com.badlogic.gdx.setup.SetupUi.landingTable;
-import static com.badlogic.gdx.setup.SetupUi.previousTable;
+import static com.badlogic.gdx.setup.SetupUi.slideRightTable;
 import static com.badlogic.gdx.setup.SetupUi.skin;
 
 public class ClassicProjectTable extends Table  {
@@ -123,7 +123,7 @@ public class ClassicProjectTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                previousTable(landingTable);
+                slideRightTable(landingTable);
             }
         });
 
@@ -136,7 +136,7 @@ public class ClassicProjectTable extends Table  {
             public void changed(ChangeEvent event, Actor actor) {
                 params.gdxVersion = "1.9.11";
                 params.packageName = "asdf";
-                finalTable(new GenerateLoadingTable(params));
+                slideDownFadeInTable(new GenerateLoadingTable(params));
             }
         });
     }

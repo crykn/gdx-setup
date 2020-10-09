@@ -32,9 +32,8 @@ public class SetupUi extends ApplicationAdapter {
 	public static ClassicProjectTable classicProjectTable;
 	public static RetrieveDataLoadingTable retrieveDataLoadingTable;
 	public static Table currentTable;
-	public static final float INTRO_TRANSITION_TIME = 1f;
+	public static final float SLOW_TRANSITION_TIME = 1.5f;
 	public static final float TRANSITION_TIME = 1.2f;
-	public static final float OUTRO_TRANSITION_TIME = 1.6f;
 	public static BackendClient backendClient;
 	public static String[] supportedGDXVersions = new String[]{};
 	public static String buildVersion;
@@ -110,23 +109,28 @@ public class SetupUi extends ApplicationAdapter {
         root.add(firstTable).minSize(600, 530);
         root.validate();
         currentTable = firstTable;
-        firstTable.addAction(alpha(1.0f, OUTRO_TRANSITION_TIME / 2, Interpolation.fade));
+        firstTable.addAction(alpha(1.0f, SLOW_TRANSITION_TIME / 2, Interpolation.fade));
         firstTable.setColor(1, 1, 1, 0);
     }
 	
-	public static void slideDownTable(Table introTable) {
-	    root.clearChildren();
-		root.add(introTable).minSize(600, 530);
-		root.validate();
-		currentTable = introTable;
-		introTable.addAction(sequence(
-				moveTo(introTable.getX(), stage.getHeight()),
-				moveTo(introTable.getX(), introTable.getY(), INTRO_TRANSITION_TIME, Interpolation.fade)
-		));
-		introTable.setPosition(introTable.getX(), stage.getHeight());
+	public static void fadeOutSlideDownTable(Table introTable) {
+        currentTable.addAction(sequence(
+                fadeOut(SLOW_TRANSITION_TIME / 2),
+                run(() -> {
+                    root.clearChildren();
+                    root.add(introTable).minSize(600, 530);
+                    root.validate();
+                    currentTable = introTable;
+                    introTable.addAction(sequence(
+                            moveTo(introTable.getX(), stage.getHeight()),
+                            moveTo(introTable.getX(), introTable.getY(), SLOW_TRANSITION_TIME / 2, Interpolation.fade)
+                    ));
+                    introTable.setPosition(introTable.getX(), stage.getHeight());
+                })
+        ));
 	}
 
-	public static void previousTable(Table previousTable) {
+	public static void slideRightTable(Table previousTable) {
 		currentTable.addAction(sequence(
 				moveTo(stage.getWidth(), currentTable.getY(), TRANSITION_TIME / 2, Interpolation.exp5),
 				run(() -> {
@@ -143,7 +147,7 @@ public class SetupUi extends ApplicationAdapter {
 		));
 	}
 
-	public static void nextTable(Table nextTable) {
+	public static void slideLeftTable(Table nextTable) {
 		currentTable.addAction(sequence(
 				moveTo(-currentTable.getWidth(), currentTable.getY(), TRANSITION_TIME / 2, Interpolation.fade),
 				run(() -> {
@@ -160,19 +164,35 @@ public class SetupUi extends ApplicationAdapter {
 		));
 	}
 
-	public static void finalTable(Table nextTable) {
+	public static void slideDownFadeInTable(Table nextTable) {
 		currentTable.addAction(sequence(
-				moveTo(currentTable.getX(), -currentTable.getHeight(), OUTRO_TRANSITION_TIME / 2, Interpolation.fade),
+				moveTo(currentTable.getX(), -currentTable.getHeight(), SLOW_TRANSITION_TIME / 2, Interpolation.fade),
 				run(() -> {
 					root.clearChildren();
 					root.add(nextTable).minSize(600, 530);
 					root.validate();
 					currentTable = nextTable;
 					nextTable.addAction(sequence(
-							alpha(1.0f, OUTRO_TRANSITION_TIME / 2, Interpolation.fade)
+							alpha(1.0f, SLOW_TRANSITION_TIME / 2, Interpolation.fade)
 					));
 					nextTable.setColor(1, 1, 1, 0);
 				})
 		));
 	}
+    
+    public static void crossFadeTable(Table nextTable) {
+        currentTable.addAction(sequence(
+                fadeOut(SLOW_TRANSITION_TIME / 2),
+                run(() -> {
+                    root.clearChildren();
+                    root.add(nextTable).minSize(600, 530);
+                    root.validate();
+                    currentTable = nextTable;
+                    nextTable.addAction(sequence(
+                            alpha(1.0f, SLOW_TRANSITION_TIME / 2, Interpolation.fade)
+                    ));
+                    nextTable.setColor(1, 1, 1, 0);
+                })
+        ));
+    }
 }

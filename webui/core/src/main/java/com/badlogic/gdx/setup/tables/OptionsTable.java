@@ -142,7 +142,7 @@ public class OptionsTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                previousTable(librariesTable);
+                slideRightTable(librariesTable);
             }
         });
 

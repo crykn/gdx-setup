@@ -60,7 +60,7 @@ public class ProjectTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                previousTable(landingTable);
+                slideRightTable(landingTable);
             }
         });
 
@@ -78,7 +78,7 @@ public class ProjectTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                nextTable(librariesTable);
+                slideLeftTable(librariesTable);
             }
         });
     }

@@ -11,8 +11,8 @@ import com.badlogic.gdx.setup.tables.RetrieveDataLoadingTable.Mode;
 import com.badlogic.gdx.utils.Align;
 import com.ray3k.tenpatch.TenPatchDrawable;
 
-import static com.badlogic.gdx.setup.SetupUi.backendClient;
-import static com.badlogic.gdx.setup.SetupUi.skin;
+import static com.badlogic.gdx.setup.SetupUi.*;
+import static com.badlogic.gdx.setup.SetupUi.landingTable;
 
 public class GenerateLoadingTable extends Table  {
     WaitForResponseListener<GeneratorResponse> generatorResponse;
@@ -62,6 +62,7 @@ public class GenerateLoadingTable extends Table  {
                     break;
                 case HIDING:
                     mode = Mode.DONE;
+                    crossFadeTable(landingTable);
                     break;
             }
         }

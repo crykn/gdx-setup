@@ -62,7 +62,7 @@ public class RetrieveDataLoadingTable extends Table  {
                     
                     landingTable.populate();
                     classicProjectTable.populate();
-                    slideDownTable(landingTable);
+                    fadeOutSlideDownTable(landingTable);
                     break;
             }
         }
