@@ -17,8 +17,6 @@ public class ClassicProjectTable extends Table  {
     private TextButton generateButton;
     
     public void populate() {
-        params.packageName = "asdf";
-        
         InputListener traversalListener = new InputListener() {
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
@@ -62,6 +60,22 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.appName = ((TextField) actor).getText();
+                generateButton.setDisabled(!isDataValid());
+            }
+        });
+    
+        table.row();
+        label = new Label("PACKAGE", skin);
+        table.add(label).right();
+    
+        textField = new TextField("", skin);
+        textField.setMessageText("com.mygdx.game");
+        table.add(textField).left();
+        textField.addListener(traversalListener);
+        textField.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                params.packageName = ((TextField) actor).getText();
                 generateButton.setDisabled(!isDataValid());
             }
         });
