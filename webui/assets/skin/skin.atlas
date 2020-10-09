@@ -55,21 +55,28 @@ button-medium-pressed
   index: -1
 button-normal
   rotate: false
-  xy: 410, 1497
+  xy: 290, 1292
   size: 83, 34
   orig: 83, 34
   offset: 0, 0
   index: -1
+button-normal-disabled
+  rotate: false
+  xy: 410, 1497
+  size: 84, 34
+  orig: 84, 34
+  offset: 0, 0
+  index: -1
 button-normal-over
   rotate: false
-  xy: 290, 1292
+  xy: 361, 208
   size: 83, 34
   orig: 83, 34
   offset: 0, 0
   index: -1
 button-normal-pressed
   rotate: false
-  xy: 361, 208
+  xy: 841, 435
   size: 83, 34
   orig: 83, 34
   offset: 0, 0
@@ -125,7 +132,7 @@ checkbox-pressed
   index: -1
 divider-horizontal
   rotate: false
-  xy: 495, 1530
+  xy: 595, 1903
   size: 11, 1
   orig: 11, 1
   offset: 0, 0
@@ -181,49 +188,49 @@ icon-check-over
   index: -1
 icon-check-pressed
   rotate: false
-  xy: 1948, 1926
+  xy: 1490, 1446
   size: 16, 17
   orig: 16, 17
   offset: 0, 0
   index: -1
 icon-delete
   rotate: false
-  xy: 1490, 1446
+  xy: 410, 1478
   size: 16, 17
   orig: 16, 17
   offset: 0, 0
   index: -1
 icon-delete-over
   rotate: false
-  xy: 410, 1478
+  xy: 290, 1273
   size: 16, 17
   orig: 16, 17
   offset: 0, 0
   index: -1
 icon-delete-pressed
   rotate: false
-  xy: 290, 1273
+  xy: 375, 1309
   size: 16, 17
   orig: 16, 17
   offset: 0, 0
   index: -1
 icon-wand
   rotate: false
-  xy: 841, 412
+  xy: 961, 617
   size: 57, 57
   orig: 57, 57
   offset: 0, 0
   index: -1
 list
   rotate: false
-  xy: 961, 650
+  xy: 1081, 855
   size: 49, 24
   orig: 49, 24
   offset: 0, 0
   index: -1
 list-library
   rotate: false
-  xy: 1081, 855
+  xy: 1, 54
   size: 49, 24
   orig: 49, 24
   offset: 0, 0
@@ -237,7 +244,7 @@ list-scroll-horizontal
   index: -1
 list-scroll-vertical
   rotate: false
-  xy: 375, 1296
+  xy: 361, 176
   size: 12, 30
   orig: 12, 30
   offset: 0, 0
@@ -853,7 +860,7 @@ select-box
   index: -1
 select-box-list
   rotate: false
-  xy: 1, 54
+  xy: 1948, 1919
   size: 49, 24
   orig: 49, 24
   offset: 0, 0
@@ -867,21 +874,21 @@ select-box-pressed
   index: -1
 textfield
   rotate: false
-  xy: 495, 1520
+  xy: 446, 234
   size: 11, 8
   orig: 11, 8
   offset: 0, 0
   index: -1
 textfield-over
   rotate: false
-  xy: 495, 1500
+  xy: 926, 461
   size: 11, 8
   orig: 11, 8
   offset: 0, 0
   index: -1
 textfield-pressed
   rotate: false
-  xy: 495, 1510
+  xy: 841, 425
   size: 11, 8
   orig: 11, 8
   offset: 0, 0

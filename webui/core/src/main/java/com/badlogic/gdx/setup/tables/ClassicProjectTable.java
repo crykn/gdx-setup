@@ -17,8 +17,10 @@ import static com.badlogic.gdx.setup.SetupUi.skin;
 
 public class ClassicProjectTable extends Table  {
     private GenerateProjectParams params = new GenerateProjectParams();
+    private TextButton generateButton;
     
     public void populate() {
+        params.packageName = "asdf";
         setBackground(skin.getDrawable("window"));
         pad(10);
         
@@ -49,6 +51,7 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.appName = ((TextField) actor).getText();
+                generateButton.setDisabled(!isDataValid());
             }
         });
         
@@ -63,6 +66,7 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.mainClass = ((TextField) actor).getText();
+                generateButton.setDisabled(!isDataValid());
             }
         });
 
@@ -81,6 +85,7 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.withDesktop = ((CheckBox) actor).isChecked();
+                generateButton.setDisabled(!isDataValid());
             }
         });
 
@@ -91,6 +96,7 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.withAndroid = ((CheckBox) actor).isChecked();
+                generateButton.setDisabled(!isDataValid());
             }
         });
 
@@ -101,6 +107,7 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.withIos = ((CheckBox) actor).isChecked();
+                generateButton.setDisabled(!isDataValid());
             }
         });
 
@@ -111,6 +118,7 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.withHtml = ((CheckBox) actor).isChecked();
+                generateButton.setDisabled(!isDataValid());
             }
         });
         
@@ -129,15 +137,21 @@ public class ClassicProjectTable extends Table  {
 
         table.add().expandX();
         
-        textButton = new TextButton("GENERATE", skin, "small");
-        table.add(textButton).uniform();
-        textButton.addListener(new ChangeListener() {
+        generateButton = new TextButton("GENERATE", skin, "small");
+        generateButton.setDisabled(!isDataValid());
+        table.add(generateButton).uniform();
+        generateButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 params.gdxVersion = "1.9.11";
-                params.packageName = "asdf";
                 slideDownFadeInTable(new GenerateLoadingTable(params));
             }
         });
+    }
+    
+    public boolean isDataValid() {
+        return params.packageName != null && params.appName != null && params.mainClass != null &&
+                !params.packageName.equals("") && !params.appName.equals("") && !params.mainClass.equals("") &&
+                (params.withAndroid || params.withDesktop || params.withHtml || params.withIos);
     }
 }
