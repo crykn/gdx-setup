@@ -7,12 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.setup.backend.BackendClient;
 import com.badlogic.gdx.setup.backend.GenerateProjectParams;
 import com.badlogic.gdx.setup.backend.GeneratorResponse;
-import com.badlogic.gdx.setup.tables.RetrieveDataLoadingTable.Mode;
 import com.badlogic.gdx.utils.Align;
 import com.ray3k.tenpatch.TenPatchDrawable;
 
 import static com.badlogic.gdx.setup.SetupUi.*;
-import static com.badlogic.gdx.setup.SetupUi.landingTable;
 
 public class GenerateLoadingTable extends Table  {
     WaitForResponseListener<GeneratorResponse> generatorResponse;

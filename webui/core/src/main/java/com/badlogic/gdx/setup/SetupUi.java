@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.setup.backend.BackendClient;
 import com.badlogic.gdx.setup.tables.ClassicProjectTable;
 import com.badlogic.gdx.setup.tables.LandingTable;
-import com.badlogic.gdx.setup.tables.RetrieveDataLoadingTable;
 import com.badlogic.gdx.setup.tables.SummaryTable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -24,7 +23,6 @@ public class SetupUi extends ApplicationAdapter {
 	public static Table root;
 	public static LandingTable landingTable;
 	public static ClassicProjectTable classicProjectTable;
-	public static RetrieveDataLoadingTable retrieveDataLoadingTable;
 	public static SummaryTable summaryTable;
 	public static Table currentTable;
 	public static final float SLOW_TRANSITION_TIME = 1.5f;
@@ -51,12 +49,13 @@ public class SetupUi extends ApplicationAdapter {
 		root.setFillParent(true);
 		stage.addActor(root);
 		
+		RetrieveData retrieveData = new RetrieveData();
+		
 		landingTable = new LandingTable();
 		classicProjectTable = new ClassicProjectTable();
-		retrieveDataLoadingTable = new RetrieveDataLoadingTable();
 		summaryTable = new SummaryTable();
 
-		firstTable(retrieveDataLoadingTable);
+		slideDownTable(landingTable);
 	}
 
 	@Override
@@ -82,13 +81,22 @@ public class SetupUi extends ApplicationAdapter {
 		skin.dispose();
 	}
     
-    public static void firstTable(Table firstTable) {
+    public static void fadeInTable(Table firstTable) {
         root.clearChildren();
         root.add(firstTable).minSize(600, 530);
         root.validate();
         currentTable = firstTable;
         firstTable.addAction(alpha(1.0f, SLOW_TRANSITION_TIME / 2, Interpolation.fade));
         firstTable.setColor(1, 1, 1, 0);
+    }
+    
+    public static void slideDownTable(Table firstTable) {
+        root.clearChildren();
+        root.add(firstTable).minSize(600, 530);
+        root.validate();
+        currentTable = firstTable;
+        firstTable.addAction(moveTo(firstTable.getX(), firstTable.getY(), SLOW_TRANSITION_TIME / 2, Interpolation.fade));
+        firstTable.setPosition(firstTable.getX(), stage.getHeight());
     }
 	
 	public static void fadeOutSlideDownTable(Table introTable) {

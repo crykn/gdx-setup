@@ -16,7 +16,7 @@ public class ClassicProjectTable extends Table  {
     private GenerateProjectParams params = new GenerateProjectParams();
     private TextButton generateButton;
     
-    public void populate() {
+    public ClassicProjectTable() {
         InputListener traversalListener = new InputListener() {
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
