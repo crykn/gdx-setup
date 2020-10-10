@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import static com.badlogic.gdx.setup.SetupUi.*;
-import static com.badlogic.gdx.utils.Align.bottomRight;
 
 public class SummaryTable extends Table  {
     public SummaryTable() {
