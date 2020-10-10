@@ -62,7 +62,7 @@ public class GenerateLoadingTable extends Table  {
                     break;
                 case HIDING:
                     mode = Mode.DONE;
-                    crossFadeTable(landingTable);
+                    crossFadeTable(summaryTable);
                     break;
             }
         }

@@ -31,6 +31,7 @@ public class SetupUi extends ApplicationAdapter {
 	public static OptionsTable optionsTable;
 	public static ClassicProjectTable classicProjectTable;
 	public static RetrieveDataLoadingTable retrieveDataLoadingTable;
+	public static SummaryTable summaryTable;
 	public static Table currentTable;
 	public static final float SLOW_TRANSITION_TIME = 1.5f;
 	public static final float TRANSITION_TIME = 1.2f;
@@ -77,6 +78,7 @@ public class SetupUi extends ApplicationAdapter {
 		optionsTable = new OptionsTable();
 		classicProjectTable = new ClassicProjectTable();
 		retrieveDataLoadingTable = new RetrieveDataLoadingTable();
+		summaryTable = new SummaryTable();
 
 		firstTable(retrieveDataLoadingTable);
 	}
