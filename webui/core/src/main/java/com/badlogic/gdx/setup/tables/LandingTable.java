@@ -1,5 +1,6 @@
 package com.badlogic.gdx.setup.tables;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -68,5 +69,11 @@ public class LandingTable extends Table  {
         defaults().clearActor();
         textButton = new TextButton("libgdx.com", skin, "link");
         add(textButton).align(bottomRight).expand();
+        textButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Gdx.net.openURI("https://libgdx.com/");
+            }
+        });
     }
 }
