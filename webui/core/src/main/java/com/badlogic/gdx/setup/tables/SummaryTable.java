@@ -2,27 +2,40 @@ package com.badlogic.gdx.setup.tables;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import static com.badlogic.gdx.setup.SetupUi.*;
 
 public class SummaryTable extends Table  {
-    public SummaryTable() {
+    public void populate() {
+        clearChildren();
         setBackground(skin.getDrawable("window"));
         pad(10);
         
         row();
-        defaults().space(50f);
+        defaults().space(35f);
         Image image = new Image(skin.getDrawable("logo-libgdx"));
         add(image);
     
         row();
         Label label = new Label("PROJECT SUCCESSFULLY GENERATED", skin, "button");
         add(label);
+        
+        if (warnings.length > 0) {
+            row();
+            Table table = new Table();
+            ScrollPane scrollPane = new ScrollPane(table, skin);
+            scrollPane.setFadeScrollBars(false);
+            scrollPane.setScrollbarsOnTop(false);
+            add(scrollPane).minHeight(50);
+
+            for (String warning : warnings) {
+                label = new Label(warning, skin);
+                table.add(label);
+                table.row();
+            }
+        }
         
         row();
         Table table = new Table();

@@ -29,6 +29,7 @@ public class SetupUi extends ApplicationAdapter {
 	public static final float TRANSITION_TIME = 1.2f;
 	public static BackendClient backendClient;
 	public static String[] supportedGDXVersions = new String[]{};
+	public static String[] warnings = new String[]{};
 	public static String buildVersion;
 	public static final String libGdxVersion = "1.9.11";
 	public static final String snapshotVersion = "1.9.12-SNAPSHOT";

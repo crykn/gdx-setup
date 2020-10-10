@@ -88,11 +88,14 @@ public class GenerateLoadingTable extends Table  {
             this.retrievedData = retrievedData;
             
             Gdx.app.postRunnable(() -> {
-                if (((GeneratorResponse) retrievedData).downloadUrl == null) {
+                GeneratorResponse generatorResponse = (GeneratorResponse) retrievedData;
+                if (generatorResponse.downloadUrl == null) {
                     mode = Mode.FAIL;
                     label.setText("FAILED TO GENERATE PROJECT\nERROR CODE " + ((GeneratorResponse) retrievedData).errorMessage);
                 } else {
                     mode = Mode.SUCCESS;
+                    warnings = generatorResponse.warnings;
+                    summaryTable.populate();
                 }
             });
             
