@@ -15,8 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.setup.backend.BackendClient;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.setup.tables.*;
-import com.badlogic.gdx.setup.widgets.LibBuilder.LibBuilderStyle;
-import com.badlogic.gdx.setup.widgets.WizardProgress.ProgressGroupStyle;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -26,9 +24,6 @@ public class SetupUi extends ApplicationAdapter {
 	public static Skin skin;
 	public static Table root;
 	public static LandingTable landingTable;
-	public static ProjectTable projectTable;
-	public static LibrariesTable librariesTable;
-	public static OptionsTable optionsTable;
 	public static ClassicProjectTable classicProjectTable;
 	public static RetrieveDataLoadingTable retrieveDataLoadingTable;
 	public static SummaryTable summaryTable;
@@ -50,32 +45,12 @@ public class SetupUi extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(stage);
 		skin = new Skin(Gdx.files.internal("skin/skin.json"));
 		
-		ProgressGroupStyle progressGroupStyle = new ProgressGroupStyle(skin.getDrawable("progress-back-10"), skin.get("progress",
-				ButtonStyle.class), skin.get("progress", LabelStyle.class));
-		skin.add("default", progressGroupStyle);
-		
-		LibBuilderStyle libBuilderStyle = new LibBuilderStyle();
-		libBuilderStyle.category = skin.get(LabelStyle.class);
-		libBuilderStyle.tooltipLabel = skin.get(LabelStyle.class);
-		libBuilderStyle.delete = skin.get("delete", ImageTextButtonStyle.class);
-		libBuilderStyle.add = skin.get("add", ButtonStyle.class);
-		libBuilderStyle.listItem = skin.get(CheckBoxStyle.class);
-		libBuilderStyle.check = skin.get("check", ImageTextButtonStyle.class);
-		libBuilderStyle.popBackground = skin.getDrawable("list-library-10");
-		libBuilderStyle.popStageBackground = skin.getDrawable("stage-background");
-		libBuilderStyle.tooltipBackground = skin.getDrawable("list-library-10");
-		libBuilderStyle.popTooltipBackground = skin.getDrawable("list-10");
-		skin.add("default", libBuilderStyle);
-		
 		root = new Table();
 		root.setBackground(skin.getDrawable("bg-10"));
 		root.setFillParent(true);
 		stage.addActor(root);
 		
 		landingTable = new LandingTable();
-		projectTable = new ProjectTable();
-		librariesTable = new LibrariesTable();
-		optionsTable = new OptionsTable();
 		classicProjectTable = new ClassicProjectTable();
 		retrieveDataLoadingTable = new RetrieveDataLoadingTable();
 		summaryTable = new SummaryTable();
