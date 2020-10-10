@@ -6,15 +6,14 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.setup.backend.BackendClient;
+import com.badlogic.gdx.setup.tables.ClassicProjectTable;
+import com.badlogic.gdx.setup.tables.LandingTable;
+import com.badlogic.gdx.setup.tables.RetrieveDataLoadingTable;
+import com.badlogic.gdx.setup.tables.SummaryTable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.setup.tables.*;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -33,6 +32,8 @@ public class SetupUi extends ApplicationAdapter {
 	public static BackendClient backendClient;
 	public static String[] supportedGDXVersions = new String[]{};
 	public static String buildVersion;
+	public static final String libGdxVersion = "1.9.11";
+	public static final String snapshotVersion = "1.9.12-SNAPSHOT";
 	public static final String setupVersion = "0.0.1";
 	
 	@Override

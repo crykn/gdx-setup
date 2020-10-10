@@ -9,7 +9,7 @@ import static com.badlogic.gdx.utils.Align.bottomRight;
 import static com.badlogic.gdx.setup.SetupUi.*;
 
 public class LandingTable extends Table  {
-    public void populate() {
+    public LandingTable() {
         setBackground(skin.getDrawable("window"));
         pad(10);
     
@@ -28,14 +28,14 @@ public class LandingTable extends Table  {
         Label label = new Label("LIBGDX", skin);
         table.add(label).right();
     
-        label = new Label(supportedGDXVersions[0], skin, "light");
+        label = new Label(libGdxVersion, skin, "light");
         table.add(label).left();
     
         table.row();
         label = new Label("SNAPSHOT", skin);
         table.add(label).right();
     
-        label = new Label(supportedGDXVersions[0], skin, "light");
+        label = new Label(snapshotVersion, skin, "light");
         table.add(label).left();
     
         table.row();
@@ -43,13 +43,6 @@ public class LandingTable extends Table  {
         table.add(label).right();
     
         label = new Label(setupVersion, skin, "light");
-        table.add(label).left();
-    
-        table.row();
-        label = new Label("BACKEND", skin);
-        table.add(label).right();
-    
-        label = new Label(buildVersion, skin, "light");
         table.add(label).left();
     
         row();

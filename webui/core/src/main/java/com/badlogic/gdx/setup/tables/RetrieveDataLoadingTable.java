@@ -60,7 +60,6 @@ public class RetrieveDataLoadingTable extends Table  {
                 case HIDING:
                     mode = Mode.DONE;
                     
-                    landingTable.populate();
                     classicProjectTable.populate();
                     fadeOutSlideDownTable(landingTable);
                     break;
