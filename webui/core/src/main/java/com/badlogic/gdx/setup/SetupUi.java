@@ -83,7 +83,7 @@ public class SetupUi extends ApplicationAdapter {
     
     public static void fadeInTable(Table firstTable) {
         root.clearChildren();
-        root.add(firstTable).minSize(600, 530);
+        root.add(firstTable).prefSize(600, 530).pad(10);
         root.validate();
         currentTable = firstTable;
         firstTable.addAction(alpha(1.0f, SLOW_TRANSITION_TIME / 2, Interpolation.fade));
@@ -92,7 +92,7 @@ public class SetupUi extends ApplicationAdapter {
     
     public static void slideDownTable(Table firstTable) {
         root.clearChildren();
-        root.add(firstTable).minSize(600, 530);
+        root.add(firstTable).prefSize(600, 530).pad(10);
         root.validate();
         currentTable = firstTable;
         firstTable.addAction(moveTo(firstTable.getX(), firstTable.getY(), SLOW_TRANSITION_TIME / 2, Interpolation.fade));
@@ -104,7 +104,7 @@ public class SetupUi extends ApplicationAdapter {
                 fadeOut(SLOW_TRANSITION_TIME / 2),
                 run(() -> {
                     root.clearChildren();
-                    root.add(introTable).minSize(600, 530);
+                    root.add(introTable).prefSize(600, 530).pad(10);
                     root.validate();
                     currentTable = introTable;
                     introTable.addAction(sequence(
@@ -121,7 +121,7 @@ public class SetupUi extends ApplicationAdapter {
 				moveTo(stage.getWidth(), currentTable.getY(), TRANSITION_TIME / 2, Interpolation.exp5),
 				run(() -> {
 					root.clearChildren();
-					root.add(previousTable).minSize(600, 530);
+                    root.add(previousTable).prefSize(600, 530).pad(10);
 					root.validate();
 					currentTable = previousTable;
 					previousTable.addAction(sequence(
@@ -138,7 +138,7 @@ public class SetupUi extends ApplicationAdapter {
 				moveTo(-currentTable.getWidth(), currentTable.getY(), TRANSITION_TIME / 2, Interpolation.fade),
 				run(() -> {
 					root.clearChildren();
-					root.add(nextTable).minSize(600, 530);
+                    root.add(nextTable).prefSize(600, 530).pad(10);
 					root.validate();
 					currentTable = nextTable;
 					nextTable.addAction(sequence(
@@ -155,7 +155,7 @@ public class SetupUi extends ApplicationAdapter {
 				moveTo(currentTable.getX(), -currentTable.getHeight(), SLOW_TRANSITION_TIME / 2, Interpolation.fade),
 				run(() -> {
 					root.clearChildren();
-					root.add(nextTable).minSize(600, 530);
+                    root.add(nextTable).prefSize(600, 530).pad(10);
 					root.validate();
 					currentTable = nextTable;
 					nextTable.addAction(sequence(
@@ -171,7 +171,7 @@ public class SetupUi extends ApplicationAdapter {
                 fadeOut(SLOW_TRANSITION_TIME / 2),
                 run(() -> {
                     root.clearChildren();
-                    root.add(nextTable).minSize(600, 530);
+                    root.add(nextTable).prefSize(600, 530);
                     root.validate();
                     currentTable = nextTable;
                     nextTable.addAction(sequence(
