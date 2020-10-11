@@ -17,6 +17,11 @@ public class ClassicProjectTable extends Table  {
     private TextButton generateButton;
     
     public ClassicProjectTable() {
+        params.appName = "my-gdx-game";
+        params.packageName = "com.mygdx.game";
+        params.mainClass = "Main";
+        params.withDesktop = true;
+        
         InputListener traversalListener = new InputListener() {
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
@@ -52,7 +57,8 @@ public class ClassicProjectTable extends Table  {
         Label label = new Label("PROJECT NAME", skin);
         table.add(label).right();
     
-        TextField textField = new TextField("", skin);
+        TextField textField = new TextField(params.appName, skin);
+        textField.setName("keyboard-focus");
         textField.setMessageText("my-gdx-game");
         table.add(textField);
         textField.addListener(traversalListener);
@@ -68,7 +74,7 @@ public class ClassicProjectTable extends Table  {
         label = new Label("PACKAGE", skin);
         table.add(label).right();
     
-        textField = new TextField("", skin);
+        textField = new TextField(params.packageName, skin);
         textField.setMessageText("com.mygdx.game");
         table.add(textField).left();
         textField.addListener(traversalListener);
@@ -84,7 +90,7 @@ public class ClassicProjectTable extends Table  {
         label = new Label("MAIN CLASS", skin);
         table.add(label).right();
     
-        textField = new TextField("", skin);
+        textField = new TextField(params.mainClass, skin);
         textField.setMessageText("Main");
         table.add(textField).left();
         textField.addListener(traversalListener);
@@ -106,6 +112,7 @@ public class ClassicProjectTable extends Table  {
 
         table.defaults().left();
         CheckBox checkBox = new CheckBox("DESKTOP", skin);
+        checkBox.setChecked(params.withDesktop);
         table.add(checkBox);
         checkBox.addListener(new ChangeListener() {
             @Override
@@ -117,6 +124,7 @@ public class ClassicProjectTable extends Table  {
 
         table.row();
         checkBox = new CheckBox("ANDROID", skin);
+        checkBox.setChecked(params.withAndroid);
         table.add(checkBox);
         checkBox.addListener(new ChangeListener() {
             @Override
@@ -128,6 +136,7 @@ public class ClassicProjectTable extends Table  {
 
         table.row();
         checkBox = new CheckBox("IOS", skin);
+        checkBox.setChecked(params.withIos);
         table.add(checkBox);
         checkBox.addListener(new ChangeListener() {
             @Override
@@ -139,6 +148,7 @@ public class ClassicProjectTable extends Table  {
 
         table.row();
         checkBox = new CheckBox("HTML5", skin);
+        checkBox.setChecked(params.withHtml);
         table.add(checkBox);
         checkBox.addListener(new ChangeListener() {
             @Override
@@ -173,6 +183,12 @@ public class ClassicProjectTable extends Table  {
                 slideDownFadeInTable(new GenerateLoadingTable(params));
             }
         });
+    }
+    
+    public void updateKeyboardFocus() {
+        TextField textField = findActor("keyboard-focus");
+        stage.setKeyboardFocus(textField);
+        textField.selectAll();
     }
     
     public boolean isDataValid() {
