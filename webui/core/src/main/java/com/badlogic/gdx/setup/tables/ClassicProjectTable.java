@@ -105,7 +105,7 @@ public class ClassicProjectTable extends Table  {
         outer.add(table);
 
         table.defaults().left();
-        CheckBox checkBox = new CheckBox("DESKTOP LWJGL3", skin);
+        CheckBox checkBox = new CheckBox("DESKTOP", skin);
         table.add(checkBox);
         checkBox.addListener(new ChangeListener() {
             @Override
@@ -127,7 +127,7 @@ public class ClassicProjectTable extends Table  {
         });
 
         table.row();
-        checkBox = new CheckBox("IOS ROBOVM", skin);
+        checkBox = new CheckBox("IOS", skin);
         table.add(checkBox);
         checkBox.addListener(new ChangeListener() {
             @Override
@@ -138,7 +138,7 @@ public class ClassicProjectTable extends Table  {
         });
 
         table.row();
-        checkBox = new CheckBox("HTML5 GWT", skin);
+        checkBox = new CheckBox("HTML5", skin);
         table.add(checkBox);
         checkBox.addListener(new ChangeListener() {
             @Override
