@@ -19,21 +19,31 @@ package com.badlogic.gdx.setup;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
+import com.google.gwt.user.client.Window;
 
 /** Launches the GWT application. */
-public class GwtLauncher extends GwtApplication {
+public class GwtLauncher extends GwtApplication implements LinkWorker {
 	@Override
 	public GwtApplicationConfiguration getConfig () {
 		GwtApplicationConfiguration gwtApplicationConfiguration = new GwtApplicationConfiguration(GwtApplication.isMobileDevice());
 		gwtApplicationConfiguration.padHorizontal = 0;
 		gwtApplicationConfiguration.padVertical = 0;
 		gwtApplicationConfiguration.disableAudio = true;
-		gwtApplicationConfiguration.openURLInNewWindow = false;
 		return gwtApplicationConfiguration;
 	}
 
 	@Override
 	public ApplicationListener createApplicationListener () {
+	    SetupUi.linkWorker = this;
 		return new SetupUi();
 	}
+    
+    @Override
+    public void openLink(boolean newWindow, String URI) {
+        if (newWindow) {
+            Window.open(URI, "_blank", null);
+        } else {
+            Window.Location.assign(URI);
+        }
+    }
 }

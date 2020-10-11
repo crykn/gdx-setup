@@ -48,7 +48,7 @@ public class GenerateLoadingTable extends Table  {
                     mode = Mode.HIDING;
                     label.setText("DOWNLOADING");
                     
-                    Gdx.net.openURI(backendClient.getDownloadUrl(generatorResponse.retrievedData));
+                    linkWorker.openLink(false, backendClient.getDownloadUrl(generatorResponse.retrievedData));
                     
                     clearChildren();
                     tenPatchDrawable = new TenPatchDrawable(skin.get("loading-hide", TenPatchDrawable.class));

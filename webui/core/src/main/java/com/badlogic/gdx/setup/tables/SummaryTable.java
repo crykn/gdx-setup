@@ -47,7 +47,7 @@ public class SummaryTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.net.openURI("https://libgdx.com/");
+                linkWorker.openLink(true, "https://libgdx.com/");
             }
         });
         
@@ -56,7 +56,7 @@ public class SummaryTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.net.openURI("https://libgdx.com/dev/setup/");
+                linkWorker.openLink(true, "https://libgdx.com/dev/setup/");
             }
         });
     
@@ -65,7 +65,7 @@ public class SummaryTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.net.openURI("https://discord.gg/6pgDK9F");
+                linkWorker.openLink(true, "https://discord.gg/6pgDK9F");
             }
         });
     

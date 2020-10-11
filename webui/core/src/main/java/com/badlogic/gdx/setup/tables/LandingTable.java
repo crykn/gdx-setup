@@ -69,7 +69,7 @@ public class LandingTable extends Table  {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.net.openURI("https://libgdx.com/");
+                linkWorker.openLink(true, "https://libgdx.com/");
             }
         });
     }

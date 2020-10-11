@@ -34,6 +34,7 @@ public class SetupUi extends ApplicationAdapter {
 	public static final String libGdxVersion = "1.9.11";
 	public static final String snapshotVersion = "1.9.12-SNAPSHOT";
 	public static final String setupVersion = "0.0.1";
+	public static LinkWorker linkWorker;
 	
 	@Override
 	public void create() {

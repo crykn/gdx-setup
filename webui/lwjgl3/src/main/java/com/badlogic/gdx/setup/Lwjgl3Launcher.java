@@ -16,16 +16,18 @@
 
 package com.badlogic.gdx.setup;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
 /** Launches the desktop (LWJGL3) application. */
-public class Lwjgl3Launcher {
+public class Lwjgl3Launcher implements LinkWorker {
 	public static void main (String[] args) {
 		createApplication();
 	}
 
 	private static Lwjgl3Application createApplication () {
+	    SetupUi.linkWorker = new Lwjgl3Launcher();
 		return new Lwjgl3Application(new SetupUi(), getDefaultConfiguration());
 	}
 
@@ -35,4 +37,9 @@ public class Lwjgl3Launcher {
 		configuration.setWindowedMode(800, 800);
 		return configuration;
 	}
+    
+    @Override
+    public void openLink(boolean newWindow, String URI) {
+        Gdx.net.openURI(URI);
+    }
 }
