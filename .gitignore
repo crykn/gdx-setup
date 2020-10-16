@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 /webui/html/war/
 
-### STS ###
+### STS / Eclipse ###
 .apt_generated
 .classpath
 .factorypath
@@ -14,7 +14,12 @@ build/
 .settings
 .springBeans
 .sts4-cache
-core/bin
+/core/bin
+/backend/bin/
+/models/bin/
+/webui/core/bin/
+/webui/html/bin/
+/webui/lwjgl3/bin/
 
 ### IntelliJ IDEA ###
 .idea

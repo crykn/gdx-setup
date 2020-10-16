@@ -10,6 +10,7 @@ buildscript {
 apply plugin: "gwt"
 apply plugin: "war"
 apply plugin: "org.gretty"
+apply plugin: "eclipse"
 
 gwt {
 	gwtVersion = "2.8.2" // Should match the version used for building the GWT backend. See gradle.properties.

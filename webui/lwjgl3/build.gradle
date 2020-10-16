@@ -1,4 +1,5 @@
 apply plugin: 'application'
+apply plugin: 'eclipse'
 
 sourceSets.main.resources.srcDirs += [ project(':webui').file('assets').path ]
 sourceSets.test.java.srcDirs = ["test/"]

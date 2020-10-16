@@ -2,7 +2,7 @@ apply plugin: "eclipse"
 apply plugin: "idea"
 
 subprojects {
-	ext.appName = 'setup-webui'
+	ext.appName = 'gdx-setup-webui'
 	ext.gdxVersion = '1.9.12-SNAPSHOT'
 	repositories {
 		mavenLocal()
@@ -13,9 +13,4 @@ subprojects {
 	}
 }
 
-// Clearing Eclipse project data in root folder:
-tasks.eclipse.doLast {
-	delete '.project'
-	delete '.classpath'
-	delete '.settings/'
-}
+eclipse.project.name = 'gdx-setup-webui'
