@@ -1,9 +1,12 @@
 HELP.md
 .gradle
-build/
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+/core/build/
+/backend/build/
+/models/build/
+/webui/core/build/
+/webui/html/build/
+/webui/lwjgl3/build/
 /webui/html/war/
 
 ### STS / Eclipse ###
@@ -26,9 +29,12 @@ build/
 *.iws
 *.iml
 *.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+/core/out/
+/backend/out/
+/models/out/
+/webui/core/out/
+/webui/html/out/
+/webui/lwjgl3/out/
 
 ### NetBeans ###
 /nbproject/private/
