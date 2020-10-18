@@ -28,3 +28,15 @@ jobs:
       run: ./gradlew clean backend:build
     - name: Build WebUI
       run: ./gradlew clean :webui:html:compileGwt
+    - name: Push files onto server
+      uses: crykn/copy_folder_to_another_repo_action@v1.0.5
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'webui/html/build/dist'
+        destination_repo: 'crykn/test'
+        destination_folder: 'setup'
+        user_email: 'crykn@users.noreply.github.com'
+        user_name: 'crykn'
+
+
