@@ -2,3 +2,4 @@ apply plugin: "java-library"
 apply plugin: "eclipse"
 
 eclipse.project.name = 'gdx-setup-models'
+sourceCompatibility = 8.0
