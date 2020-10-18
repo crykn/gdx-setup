@@ -36,6 +36,7 @@ jobs:
         source_folder: 'webui/html/build/dist'
         destination_repo: 'crykn/test'
         destination_folder: 'setup'
+        destination_branch: 'main'
         user_email: 'crykn@users.noreply.github.com'
         user_name: 'crykn'
 
