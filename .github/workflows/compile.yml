@@ -33,7 +33,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_folder: '$GITHUB_WORKSPACE/gdx-setup/gdx-setup/webui/html/build/dist'
+        source_folder: 'webui/html/build/dist'
         destination_repo: 'crykn/test'
         destination_folder: 'setup'
         destination_branch: 'main'
