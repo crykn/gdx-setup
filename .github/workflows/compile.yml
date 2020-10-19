@@ -28,16 +28,15 @@ jobs:
       run: ./gradlew clean backend:build
     - name: Build WebUI
       run: ./gradlew clean :webui:html:dist
-    - name: Push files onto server
-      uses: crykn/copy_folder_to_another_repo_action@v1.0.5b
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      with:
-        source_folder: 'webui/html/build/dist'
-        destination_repo: 'crykn/test'
-        destination_folder: 'setup'
-        destination_branch: 'main'
-        user_email: 'crykn@users.noreply.github.com'
-        user_name: 'crykn'
+#    - name: Push files onto server
+#      uses: crykn/copy_folder_to_another_repo_action@v1.0.5b
+#      env:
+#        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#      with:
+#        source_folder: 'webui/html/build/dist'
+#        destination_repo: 'libgdx/libgdx.github.io'
+#        destination_folder: 'setup'
+#        user_email: 'crykn@users.noreply.github.com'
+#        user_name: 'crykn'
 
 
