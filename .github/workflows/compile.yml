@@ -27,7 +27,7 @@ jobs:
     - name: Build backend
       run: ./gradlew clean backend:build
     - name: Build WebUI
-      run: ./gradlew clean :webui:html:compileGwt
+      run: ./gradlew clean :webui:html:dist
     - name: Push files onto server
       uses: crykn/copy_folder_to_another_repo_action@v1.0.5b
       env:
