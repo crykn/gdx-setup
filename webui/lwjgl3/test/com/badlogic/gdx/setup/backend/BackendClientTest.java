@@ -70,7 +70,7 @@ public class BackendClientTest {
         BackendClient backendClient = new BackendClient();
         GenerateProjectParams params = new GenerateProjectParams();
         params.appName = "test";
-        params.gdxVersion = "1.9.11";
+        params.gdxVersion = "1.9.12";
         params.packageName = "com.badlogic.setup.test";
         params.mainClass = "MyTestClass";
         params.withHtml = true;

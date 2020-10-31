@@ -14,7 +14,7 @@ import com.badlogic.gdx.setup.backend.GenerateProjectParams;
 
 @Service
 public class ProjectGeneratorService {
-	public static final String GENERATED_VERSION = "1.9.12-SNAPSHOT";
+	public static final String GENERATED_VERSION = DependencyBank.libgdxVersion;
 	private ConcurrentHashMap<String, CachedProjects> generatedFiles = new ConcurrentHashMap<>();
 
 	public String generateAndZipGdxProject(GenerateProjectParams projectData) throws Exception {
@@ -33,10 +33,8 @@ public class ProjectGeneratorService {
 		if (projectData.withHtml)
 			projects.add(ProjectType.HTML);
 
-		// TODO current version has template files for 1.9.12-SNAPSHOT, but puts version 1.9.11
-		// in it. We have to change that.
 		if (!projectData.gdxVersion.equals(GENERATED_VERSION)) {
-			projectData.warnings.add("Ignored given gdx-version. Files are generated for 1.9.12-SNAPSHOT.");
+			projectData.warnings.add("Ignored given gdx-version. Files are generated for " + GENERATED_VERSION);
 		}
 
 		List<Dependency> dependencies = new ArrayList<Dependency>();

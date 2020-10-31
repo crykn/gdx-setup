@@ -63,7 +63,7 @@ public class ProjectGeneratorController {
     public VersionResponse getVersions() {
         VersionResponse response = new VersionResponse();
 
-        response.backendVersion = "POC-20201005";
+        response.backendVersion = "POC-20201031";
         response.supportedGdxVersions = new String[]{ProjectGeneratorService.GENERATED_VERSION};
 
         return response;
