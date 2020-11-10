@@ -17,6 +17,8 @@ import com.badlogic.gdx.setup.backend.GenerateProjectParams;
 @Service
 public class ProjectGeneratorService {
 	public static final String GENERATED_VERSION = DependencyBank.libgdxVersion;
+	public static final String GENERATOR_VERSION = "POC-20201110";
+
 	private ConcurrentHashMap<String, CachedProjects> generatedFiles = new ConcurrentHashMap<>();
 
 	public String generateAndZipGdxProject(GenerateProjectParams projectData) throws Exception {
