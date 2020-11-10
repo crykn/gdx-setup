@@ -62,7 +62,8 @@ public class BackendClientTest {
         waitWhileRequesting();
         Assert.assertNotNull(versionResponse.retrievedData);
         Assert.assertNotNull(versionResponse.retrievedData.supportedGdxVersions);
-        Assert.assertFalse(versionResponse.retrievedData.supportedGdxVersions.length == 0);
+        Assert.assertNotEquals(0, versionResponse.retrievedData.supportedGdxVersions.length);
+        Assert.assertNotEquals(0, versionResponse.retrievedData.availableExtensions.length);
     }
 
     @Test
@@ -74,6 +75,7 @@ public class BackendClientTest {
         params.packageName = "com.badlogic.setup.test";
         params.mainClass = "MyTestClass";
         params.withHtml = true;
+        params.extensions = new String[] { "controllers" };
 
         WaitForResponseListener<GeneratorResponse> generatorResponse
                 = new WaitForResponseListener<>();

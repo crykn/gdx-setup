@@ -1,7 +1,9 @@
 package com.badlogic.gdx.setup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -39,6 +41,20 @@ public class ProjectGeneratorService {
 
 		List<Dependency> dependencies = new ArrayList<Dependency>();
 		dependencies.add(bank.getDependency(ProjectDependency.GDX));
+
+		if (projectData.extensions != null) {
+			Map<String, Dependency> dependencyMap = new HashMap<>();
+			for (ProjectDependency pd : ProjectDependency.values()) {
+				dependencyMap.put(pd.name().toLowerCase(), bank.getDependency(pd));
+			}
+
+			for (String extension : projectData.extensions) {
+				if (dependencyMap.containsKey(extension)) {
+					dependencies.add(dependencyMap.get(extension));
+				} else
+					projectData.warnings.add("Extension " + extension + " not found");
+			}
+		}
 
 		Language languageEnum = Language.JAVA;
 		builder.buildProject(projects, dependencies);

@@ -12,6 +12,7 @@ public class GenerateProjectParams {
 	public boolean withIos;
 	public boolean withHtml;
 	public boolean withDesktop;
+	public String[] extensions;
 
 	public List<String> warnings = new LinkedList<>();
 

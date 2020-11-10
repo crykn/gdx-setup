@@ -6,30 +6,40 @@ import com.badlogic.gdx.net.HttpParametersUtils;
 import com.badlogic.gdx.net.HttpStatus;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.JsonWriter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BackendClient {
     public static final int SC_NO_CONNECTION = 0;
-    private static final String BASE_URL = "https://gdx-setup-backend.herokuapp.com";
+    private static final String BASE_URL = "http://localhost:8080";
     private static final String LOG_TAG = "BACKEND";
 
     public void generateProject(GenerateProjectParams params, IBackendResponse<GeneratorResponse> callback) {
-        Map<String, String> httpParams = new HashMap<>();
-        httpParams.put("appName", params.appName);
-        httpParams.put("packageName", params.packageName);
-        httpParams.put("mainClass", params.mainClass);
-        httpParams.put("withAndroid", String.valueOf(params.withAndroid));
-        httpParams.put("withHtml", String.valueOf(params.withHtml));
-        httpParams.put("withDesktop", String.valueOf(params.withDesktop));
-        httpParams.put("withIos", String.valueOf(params.withIos));
-        httpParams.put("gdxVersion", params.gdxVersion);
+        final Net.HttpRequest httpRequest = buildRequest("/generate", null);
+        httpRequest.setMethod(Net.HttpMethods.POST);
 
-        final Net.HttpRequest httpRequest = buildRequest("/generate", httpParams);
-        httpRequest.setMethod(Net.HttpMethods.GET);
+        JsonValue root = new JsonValue(JsonValue.ValueType.object);
+        root.addChild("appName", new JsonValue(params.appName));
+        root.addChild("packageName", new JsonValue(params.packageName));
+        root.addChild("mainClass", new JsonValue(params.mainClass));
+        root.addChild("withAndroid", new JsonValue(String.valueOf(params.withAndroid)));
+        root.addChild("withHtml", new JsonValue(String.valueOf(params.withHtml)));
+        root.addChild("withDesktop", new JsonValue(String.valueOf(params.withDesktop)));
+        root.addChild("withIos", new JsonValue(String.valueOf(params.withIos)));
+        root.addChild("gdxVersion", new JsonValue(params.gdxVersion));
+        JsonValue extensionArray = new JsonValue(JsonValue.ValueType.array);
+        if (params.extensions != null) {
+            for (String extension : params.extensions) {
+                extensionArray.addChild(new JsonValue(extension));
+            }
+        }
+        root.addChild("extensions", extensionArray);
+
+        httpRequest.setHeader("Content-Type", "application/json");
+        httpRequest.setContent(root.toJson(JsonWriter.OutputType.json));
 
         Gdx.net.sendHttpRequest(httpRequest, new HttpResponseHandler<GeneratorResponse>(callback) {
             @Override
