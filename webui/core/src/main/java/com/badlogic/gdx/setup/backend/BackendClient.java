@@ -60,11 +60,18 @@ public class BackendClient {
                 VersionResponse response = new VersionResponse();
 
                 response.backendVersion = json.getString("backendVersion", null);
+
                 List<String> gdxVersions = new ArrayList<>();
                 for (JsonValue gdxVersion = json.get("supportedGdxVersions").child; gdxVersion != null; gdxVersion = gdxVersion.next) {
                     gdxVersions.add(gdxVersion.asString());
                 }
-                response.supportedGdxVersions = gdxVersions.toArray(new String[]{});
+                response.supportedGdxVersions = gdxVersions.toArray(new String[0]);
+
+                List<String> extensions = new ArrayList<>();
+                for (JsonValue extension = json.get("availableExtensions").child; extension != null; extension = extension.next) {
+                    extensions.add(extension.asString());
+                }
+                response.availableExtensions = extensions.toArray(new String[0]);
 
                 return response;
             }

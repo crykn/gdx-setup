@@ -1,5 +1,6 @@
 package com.badlogic.gdx.setup.rest;
 
+import com.badlogic.gdx.setup.DependencyBank;
 import com.badlogic.gdx.setup.ProjectGeneratorService;
 import com.badlogic.gdx.setup.ProjectGeneratorService.CachedProjects;
 import com.badlogic.gdx.setup.backend.GenerateProjectParams;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -65,6 +69,13 @@ public class ProjectGeneratorController {
 
         response.backendVersion = "POC-20201031";
         response.supportedGdxVersions = new String[]{ProjectGeneratorService.GENERATED_VERSION};
+
+        List<String> dependencies = new ArrayList<>(DependencyBank.ProjectDependency.values().length);
+        for (DependencyBank.ProjectDependency pd : DependencyBank.ProjectDependency.values()) {
+            dependencies.add(pd.name().toLowerCase());
+        }
+        response.availableExtensions = dependencies.toArray(new String[0]);
+
 
         return response;
     }
