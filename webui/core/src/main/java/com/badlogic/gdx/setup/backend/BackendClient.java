@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class BackendClient {
     public static final int SC_NO_CONNECTION = 0;
-    private static final String BASE_URL = "http://localhost:8080";
+    private static final String BASE_URL = "https://gdx-setup-backend.herokuapp.com";
     private static final String LOG_TAG = "BACKEND";
 
     public void generateProject(GenerateProjectParams params, IBackendResponse<GeneratorResponse> callback) {
