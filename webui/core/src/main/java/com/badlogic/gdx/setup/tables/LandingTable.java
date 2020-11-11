@@ -35,13 +35,6 @@ public class LandingTable extends Table  {
         table.add(label).left();
     
         table.row();
-        label = new Label("SNAPSHOT", skin);
-        table.add(label).right();
-    
-        label = new Label(snapshotVersion, skin, "light");
-        table.add(label).left();
-    
-        table.row();
         label = new Label("SETUP", skin);
         table.add(label).right();
     
