@@ -17,7 +17,7 @@ import com.badlogic.gdx.setup.backend.GenerateProjectParams;
 @Service
 public class ProjectGeneratorService {
 	public static final String GENERATED_VERSION = DependencyBank.libgdxVersion;
-	public static final String GENERATOR_VERSION = "POC-20201110";
+	public static final String GENERATOR_VERSION = "POC-20201113";
 
 	private ConcurrentHashMap<String, CachedProjects> generatedFiles = new ConcurrentHashMap<>();
 
@@ -59,8 +59,13 @@ public class ProjectGeneratorService {
 		}
 
 		Language languageEnum = Language.JAVA;
-		builder.buildProject(projects, dependencies);
+		List<String> incompatibilities = builder.buildProject(projects, dependencies);
 		builder.build(languageEnum);
+
+		for (String incompatibility : incompatibilities) {
+			projectData.warnings.add(incompatibility);
+		}
+
 
 		final String uuid = UUID.randomUUID().toString();
 
