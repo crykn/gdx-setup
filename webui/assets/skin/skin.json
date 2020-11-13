@@ -53,6 +53,12 @@
 		"b": 0,
 		"a": 0.47333333
 	},
+	"version": {
+		"r": 0.5568628,
+		"g": 0.15686275,
+		"b": 1,
+		"a": 0.60333335
+	},
 	"white": {
 		"r": 1,
 		"g": 1,
@@ -764,6 +770,10 @@
 	"loading": {
 		"font": "light",
 		"fontColor": "highlight"
+	},
+	"version": {
+		"font": "progress",
+		"fontColor": "version"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {

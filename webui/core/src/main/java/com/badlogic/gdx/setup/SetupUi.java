@@ -6,12 +6,14 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.setup.backend.BackendClient;
 import com.badlogic.gdx.setup.tables.ClassicProjectTable;
 import com.badlogic.gdx.setup.tables.LandingTable;
 import com.badlogic.gdx.setup.tables.SummaryTable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
@@ -49,6 +51,13 @@ public class SetupUi extends ApplicationAdapter {
 		root.setBackground(skin.getDrawable("bg-10"));
 		root.setFillParent(true);
 		stage.addActor(root);
+		
+		Table table = new Table();
+        stage.addActor(table);
+        
+        table.pad(10).align(Align.bottomLeft);
+        Label label = new Label(setupVersion, skin, "version");
+        table.add(label);
 		
 		RetrieveData retrieveData = new RetrieveData();
 		
