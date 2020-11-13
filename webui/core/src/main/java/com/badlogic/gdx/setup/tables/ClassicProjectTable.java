@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.setup.backend.GenerateProjectParams;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectSet;
 
 import static com.badlogic.gdx.Application.ApplicationType.WebGL;
 import static com.badlogic.gdx.setup.SetupUi.*;
@@ -15,12 +17,15 @@ import static com.badlogic.gdx.setup.SetupUi.*;
 public class ClassicProjectTable extends Table  {
     private GenerateProjectParams params = new GenerateProjectParams();
     private TextButton generateButton;
+    private ObjectSet<String> extensions;
     
     public ClassicProjectTable() {
         params.appName = "my-gdx-game";
         params.packageName = "com.mygdx.game";
         params.mainClass = "Main";
         params.withDesktop = true;
+        params.extensions = new String[0];
+        extensions = new ObjectSet<>();
         
         InputListener traversalListener = new InputListener() {
             @Override
@@ -107,8 +112,12 @@ public class ClassicProjectTable extends Table  {
         outer.add(image).growX().space(10);
 
         outer.row();
+        Table bottom = new Table();
+        outer.add(bottom);
+    
+        bottom.defaults().top().space(10);
         table = new Table();
-        outer.add(table);
+        bottom.add(table);
 
         table.defaults().left();
         CheckBox checkBox = new CheckBox("DESKTOP", skin);
@@ -158,6 +167,97 @@ public class ClassicProjectTable extends Table  {
             }
         });
         
+        table = new Table();
+        bottom.add(table);
+        
+        table.defaults().left();
+        checkBox = new CheckBox("Bullet", skin);
+        checkBox.setChecked(extensions.contains("bullet"));
+        table.add(checkBox);
+        checkBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setExtension("bullet", ((CheckBox) actor).isChecked());
+            }
+        });
+    
+        table.row();
+        checkBox = new CheckBox("Freetype", skin);
+        checkBox.setChecked(extensions.contains("freetype"));
+        table.add(checkBox);
+        checkBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setExtension("freetype", ((CheckBox) actor).isChecked());
+            }
+        });
+    
+        table.row();
+        checkBox = new CheckBox("Tools", skin);
+        checkBox.setChecked(extensions.contains("tools"));
+        table.add(checkBox);
+        checkBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setExtension("tools", ((CheckBox) actor).isChecked());
+            }
+        });
+    
+        table.row();
+        checkBox = new CheckBox("Controllers", skin);
+        checkBox.setChecked(extensions.contains("controllers"));
+        table.add(checkBox);
+        checkBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setExtension("controllers", ((CheckBox) actor).isChecked());
+            }
+        });
+    
+        table.row();
+        checkBox = new CheckBox("Box2D", skin);
+        checkBox.setChecked(extensions.contains("box2d"));
+        table.add(checkBox);
+        checkBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setExtension("box2d", ((CheckBox) actor).isChecked());
+            }
+        });
+    
+        table.row();
+        checkBox = new CheckBox("Box2dLights", skin);
+        checkBox.setChecked(extensions.contains("box2dlights"));
+        table.add(checkBox);
+        checkBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setExtension("box2dlights", ((CheckBox) actor).isChecked());
+            }
+        });
+    
+        table.row();
+        checkBox = new CheckBox("Ashley", skin);
+        checkBox.setChecked(extensions.contains("ashley"));
+        table.add(checkBox);
+        checkBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setExtension("ashley", ((CheckBox) actor).isChecked());
+            }
+        });
+    
+        table.row();
+        checkBox = new CheckBox("AI", skin);
+        checkBox.setChecked(extensions.contains("ai"));
+        table.add(checkBox);
+        checkBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setExtension("ai", ((CheckBox) actor).isChecked());
+            }
+        });
+        
         row();
         table = new Table();
         add(table).growX();
@@ -183,6 +283,12 @@ public class ClassicProjectTable extends Table  {
                 slideDownFadeInTable(new GenerateLoadingTable(params));
             }
         });
+    }
+    
+    private void setExtension(String name, boolean active) {
+        if (!active) extensions.remove(name);
+        else extensions.add(name);
+        params.extensions = extensions.iterator().toArray().toArray(String.class);
     }
     
     public void updateKeyboardFocus() {
