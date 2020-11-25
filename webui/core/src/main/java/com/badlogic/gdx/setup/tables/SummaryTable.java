@@ -25,6 +25,7 @@ public class SummaryTable extends Table  {
         if (warnings.length > 0) {
             row();
             Table table = new Table();
+            table.pad(10);
             ScrollPane scrollPane = new ScrollPane(table, skin);
             scrollPane.setFadeScrollBars(false);
             scrollPane.setScrollbarsOnTop(false);
