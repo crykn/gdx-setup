@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 
 import static com.badlogic.gdx.setup.SetupUi.*;
 import static com.badlogic.gdx.utils.Align.bottomRight;
@@ -34,13 +35,12 @@ public class LandingTable extends Table  {
         label = new Label(libGdxVersion, skin, "light");
         table.add(label).left();
     
-        table.row();
-        label = new Label("SETUP", skin);
-        table.add(label).right();
-    
-        label = new Label(setupVersion, skin, "light");
-        table.add(label).left();
-    
+        row();
+        label = new Label("libGDX is a cross platform game development framework.\nUse this web app to generate and download your game project!", skin);
+        label.setAlignment(Align.center);
+        label.setWrap(true);
+        add(label).fillX();
+        
         row();
         table = new Table();
         add(table);
