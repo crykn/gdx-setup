@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 
 import static com.badlogic.gdx.setup.SetupUi.*;
 import static com.badlogic.gdx.utils.Align.bottomRight;
@@ -22,6 +23,7 @@ public class LandingTable extends Table  {
         row();
         defaults().space(50f);
         Image image = new Image(skin.getDrawable("logo-libgdx"));
+        image.setScaling(Scaling.none);
         add(image);
     
         row();
