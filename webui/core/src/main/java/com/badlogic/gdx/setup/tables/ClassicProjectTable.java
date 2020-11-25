@@ -24,6 +24,9 @@ public class ClassicProjectTable extends Table  {
         params.packageName = "com.mygdx.game";
         params.mainClass = "Main";
         params.withDesktop = true;
+        params.withAndroid = true;
+        params.withIos = true;
+        params.withHtml = true;
         params.extensions = new String[0];
         extensions = new ObjectSet<>();
         
