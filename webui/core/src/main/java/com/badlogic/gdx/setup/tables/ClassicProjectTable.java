@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.setup.backend.GenerateProjectParams;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 
@@ -18,6 +19,8 @@ public class ClassicProjectTable extends Table  {
     private GenerateProjectParams params = new GenerateProjectParams();
     private TextButton generateButton;
     private ObjectSet<String> extensions;
+    private ObjectSet<String> warnings;
+    private Label warningLabel;
     
     public ClassicProjectTable() {
         params.appName = "my-gdx-game";
@@ -29,6 +32,7 @@ public class ClassicProjectTable extends Table  {
         params.withHtml = true;
         params.extensions = new String[0];
         extensions = new ObjectSet<>();
+        warnings = new ObjectSet<>();
         
         InputListener traversalListener = new InputListener() {
             @Override
@@ -54,7 +58,6 @@ public class ClassicProjectTable extends Table  {
         add(image).growX().space(15);
         
         row();
-        defaults().space(50f);
         Table outer = new Table();
         add(outer).expand();
 
@@ -167,6 +170,12 @@ public class ClassicProjectTable extends Table  {
             public void changed(ChangeEvent event, Actor actor) {
                 params.withHtml = ((CheckBox) actor).isChecked();
                 generateButton.setDisabled(!isDataValid());
+                
+                if (extensions.contains("freetype") && params.withHtml) addWarning("Freetype is not compatible with the HTML5 backend.");
+                else removeWarning("Freetype is not compatible with the HTML5 backend.");
+    
+                if (extensions.contains("bullet") && params.withHtml) addWarning("Bullet is not compatible with the HTML5 backend.");
+                else removeWarning("Bullet is not compatible with the HTML5 backend.");
             }
         });
         
@@ -181,6 +190,9 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 setExtension("bullet", ((CheckBox) actor).isChecked());
+    
+                if (extensions.contains("bullet") && params.withHtml) addWarning("Bullet is not compatible with the HTML5 backend.");
+                else removeWarning("Bullet is not compatible with the HTML5 backend.");
             }
         });
     
@@ -192,6 +204,9 @@ public class ClassicProjectTable extends Table  {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 setExtension("freetype", ((CheckBox) actor).isChecked());
+    
+                if (extensions.contains("freetype") && params.withHtml) addWarning("Freetype is not compatible with the HTML5 backend.");
+                else removeWarning("Freetype is not compatible with the HTML5 backend.");
             }
         });
     
@@ -262,6 +277,12 @@ public class ClassicProjectTable extends Table  {
         });
         
         row();
+        warningLabel = new Label("", skin);
+        warningLabel.setAlignment(Align.center);
+        warningLabel.setWrap(true);
+        add(warningLabel).growX().spaceBottom(20);
+        
+        row();
         table = new Table();
         add(table).growX();
 
@@ -292,6 +313,16 @@ public class ClassicProjectTable extends Table  {
         if (!active) extensions.remove(name);
         else extensions.add(name);
         params.extensions = extensions.iterator().toArray().toArray(String.class);
+    }
+    
+    private void addWarning(String warning) {
+        warnings.add(warning);
+        warningLabel.setText(warning);
+    }
+    
+    private void removeWarning(String warning) {
+        warnings.remove(warning);
+        warningLabel.setText(warnings.size > 0 ? warnings.iterator().toArray().peek() : "");
     }
     
     public void updateKeyboardFocus() {
